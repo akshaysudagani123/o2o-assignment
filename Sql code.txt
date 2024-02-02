@@ -1,0 +1,32 @@
+CREATE TABLE Product (
+    product_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE Variant (
+    variant_id SERIAL PRIMARY KEY,
+    product_id INTEGER REFERENCES Product(product_id) ON DELETE CASCADE,
+    size VARCHAR(50),
+    color VARCHAR(50),
+    price DECIMAL(10, 2) NOT NULL,
+    inventory_count INTEGER NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE Order (
+    order_id SERIAL PRIMARY KEY,
+    buyer_id INTEGER, -- Reference to buyer/user table
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE OrderItem (
+    order_item_id SERIAL PRIMARY KEY,
+    order_id INTEGER REFERENCES Order(order_id) ON DELETE CASCADE,
+    variant_id INTEGER REFERENCES Variant(variant_id),
+    quantity INTEGER NOT NULL,
+    price DECIMAL(10, 2) NOT NULL
+);
+
+

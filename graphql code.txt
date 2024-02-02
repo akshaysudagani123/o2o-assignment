@@ -1,0 +1,14 @@
+query GetProducts {
+  products {
+    product_id
+    name
+    description
+    variants {
+      variant_id
+      size
+      color
+      price
+      inventory_count
+    }
+  }
+}

@@ -1,0 +1,6 @@
+mutation UpdateInventory($variantId: Int!, $newCount: Int!) {
+  update_Variant_by_pk(pk_columns: {variant_id: $variantId}, _set: {inventory_count: $newCount}) {
+    variant_id
+    inventory_count
+  }
+}
